@@ -45,7 +45,7 @@ DSC_MOA_Clusterer <- function(class, description = class,
   cliParameters <- convert_params(parameters)
 
   clusterer <- .jcast(.jnew(class), "moa/clusterers/AbstractClusterer")
-  options <- .jcall(clusterer, "Lmoa/options/Options;", "getOptions")
+  options <- .jcall(clusterer, "Lcom/github/javacliparser/Options;", "getOptions")
   .jcall(options, "V", "setViaCLIString", cliParameters)
   .jcall(clusterer, "V", "prepareForUse")
 
@@ -94,7 +94,6 @@ update.DSC_MOA <- function(object, dsd, n, verbose=FALSE, ...) {
     d <- get_points(dsd, n)
     .jcall("StreamMOA", "V", "update", object$javaObj,
       .jarray(as.matrix(d), dispatch = TRUE))
-
    }
 
 

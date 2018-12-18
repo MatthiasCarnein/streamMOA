@@ -9,7 +9,9 @@ export(
   DSC_DenStream,
   DSC_CluStream,
   DSC_ClusTree,
-	
+  DSC_streamkm,
+  DSC_BICO,
+
   DSD_RandomRBFGeneratorEvents
 )
 
