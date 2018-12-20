@@ -58,7 +58,7 @@ DSC_MOA_Clusterer <- function(class, description = class,
       cliParameters = cliParameters,
       javaObj = clusterer
     ),
-    class = c("DSC_CluStream","DSC_Micro","DSC_MOA","DSC")
+    class = c(class, "DSC_Micro","DSC_MOA","DSC")
   )
 }
 
