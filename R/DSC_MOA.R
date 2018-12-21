@@ -105,22 +105,22 @@ update.DSC_MOA <- function(object, dsd, n, verbose=FALSE, ...) {
 
 ### accessors
 get_microclusters.DSC_MOA <- function(x, ...) {
-  if(.jcall(x$javaObj, "Z", "implementsMicroClusterer"))
-    .get_centers_MOA(.jcall(x$javaObj,
-      "Lmoa/cluster/Clustering;", "getMicroClusteringResult"))
-  else
-    .get_centers_MOA(.jcall(x$javaObj,
-      "Lmoa/cluster/Clustering;", "getClusteringResult"))
+  tryCatch(
+    centers <- .get_centers_MOA(.jcall(x$javaObj,
+                                       "Lmoa/cluster/Clustering;", "getMicroClusteringResult")),
+    error=function(e) stop("Micro-clusters not supported"))
+
+  centers
 }
 
-#get_macroclusters.DSC_MOA <- function(x, ...) {
-#  tryCatch(
-#    centers <- .get_centers_MOA(.jcall(x$javaObj,
-#      "Lmoa/cluster/Clustering;", "getClusteringResult")),
-#    error=function(e) stop("Macro-clusters not supported"))
-#
-#  centers
-#}
+get_macroclusters.DSC_MOA <- function(x, ...) {
+ tryCatch(
+   centers <- .get_centers_MOA(.jcall(x$javaObj,
+     "Lmoa/cluster/Clustering;", "getClusteringResult")),
+   error=function(e) stop("Macro-clusters not supported"))
+
+ centers
+}
 
 .get_centers_MOA <- function(x) {
   # array of microclusters
@@ -159,23 +159,22 @@ get_microclusters.DSC_MOA <- function(x, ...) {
 }
 
 get_microweights.DSC_MOA <- function(x, ...) {
-  if (.jcall(x$javaObj, "Z", "implementsMicroClusterer"))
-    .get_weights_MOA(.jcall(x$javaObj,
-      "Lmoa/cluster/Clustering;", "getMicroClusteringResult"))
-  else
-    .get_weights_MOA(.jcall(x$javaObj,
-      "Lmoa/cluster/Clustering;", "getClusteringResult"))
+  tryCatch(
+    weights <- .get_weights_MOA(.jcall(x$javaObj,
+                                       "Lmoa/cluster/Clustering;", "getMicroClusteringResult")),
+    error=function(e) stop("Micro-clusters not supported"))
 
+  weights
 }
 
-#get_macroweights.DSC_MOA <- function(x, ...) {
-#  tryCatch(
-#    weights <- .get_weights_MOA(.jcall(x$javaObj,
-#      "Lmoa/cluster/Clustering;", "getClusteringResult")),
-#    error=function(e) stop("Macro-clusters not supported"))
-#
-#  weights
-#}
+get_macroweights.DSC_MOA <- function(x, ...) {
+ tryCatch(
+   weights <- .get_weights_MOA(.jcall(x$javaObj,
+     "Lmoa/cluster/Clustering;", "getClusteringResult")),
+   error=function(e) stop("Macro-clusters not supported"))
+
+ weights
+}
 
 .get_weights_MOA <- function(x) {
   mClusters <- .jcall(x,
