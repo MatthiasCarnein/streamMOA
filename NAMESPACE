@@ -10,8 +10,8 @@ export(
   DSC_CluStream,
   DSC_ClusTree,
   DSC_streamkm,
-  DSC_BICO,
-  DSC_DStream,
+  #DSC_BICO,
+  #DSC_DStream,
 
   DSD_RandomRBFGeneratorEvents
 )
